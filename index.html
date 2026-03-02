@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Lobo Financiero | Cazador de mitos financieros</title>
+  <meta name="description"
+    content="Simulaciones, código y cero gurús. Aprende a manejar tu lana como alguien que sí sabe lo que está haciendo.">
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <img src="public/loboLogo.png" alt="El Lobo Financiero Logo" height="52">
+        <span class="brand-text">El Lobo Financiero</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#contenido" class="nav-link">Contenido</a>
+        <a href="#laboratorio" class="nav-link">Laboratorio</a>
+        <a href="#lobotracker" class="nav-link">LoboTracker</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <header id="hero" class="hero-section">
+      <div class="hero-bg-glow"></div>
+      <div class="container hero-content">
+        <span class="eyebrow">Cazador de mitos financieros</span>
+        <h1>
+          <span class="h1-line1">Finanzas sin humo.</span><br>
+          <span class="h1-line2">Con datos.</span>
+        </h1>
+        <p class="hero-body">
+          Simulaciones, código y cero gurús. Aprende a manejar tu lana como alguien que sí sabe lo que está haciendo.
+        </p>
+        <div class="hero-ctas">
+          <a href="#contenido" class="btn btn-primary">Ver el contenido</a>
+          <a href="#lobotracker" class="btn btn-outline">Descargar LoboTracker</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENIDO -->
+    <section id="contenido" class="section-contenido">
+      <div class="container">
+        <span class="section-label">Contenido</span>
+        <h2>El lobo donde vive el debate.</h2>
+        <p class="subtitle">Finanzas y tecnología sin rodeos — en TikTok y YouTube. Los experimentos que los gurús nunca
+          harían.</p>
+
+        <div class="cards-grid">
+          <!-- TikTok Card -->
+          <div class="card card-tiktok">
+            <span class="platform-label">TikTok · Canal principal</span>
+            <h3>@ellobofinancierou</h3>
+            <div class="stat-block">
+              <span class="stat-number">4K</span>
+              <span class="stat-sublabel">seguidores y contando</span>
+            </div>
+            <a href="https://www.tiktok.com/@ellobofinancierou" target="_blank" rel="noopener noreferrer"
+              class="btn btn-pill">Abrir en TikTok &rarr;</a>
+          </div>
+
+          <!-- YouTube Card -->
+          <div class="card card-youtube">
+            <span class="platform-label">YouTube</span>
+            <h3>El Lobo Financiero</h3>
+            <div class="stat-block">
+              <span class="stat-number" id="yt-sub-count">1.5K</span>
+              <span class="stat-sublabel">suscriptores</span>
+            </div>
+            <a href="https://www.youtube.com/@ElLoboFinanciero" target="_blank" rel="noopener noreferrer"
+              class="btn btn-pill">Abrir en YouTube &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LABORATORIO (Streamlit) -->
+    <section id="laboratorio" class="section-laboratorio">
+      <div class="container container-sm">
+        <span class="section-label">Laboratorio</span>
+        <h2>Experimentos y Simuladores</h2>
+        <p class="subtitle">Herramientas creadas con código y datos. Pruébalas ahora mismo.</p>
+
+        <div class="tools-grid">
+          <!-- Tool 1 -->
+          <div class="card card-tool">
+            <img src="public/casaStr.png" alt="Home Buy vs Rent Simulator" class="tool-thumbnail" loading="lazy">
+            <div class="tool-content">
+              <span class="platform-label">Simulador interactivo</span>
+              <h3>Comprar vs. Rentar</h3>
+              <p>Analiza el costo real de comprar casa frente a rentar e invertir la diferencia a través de múltiples
+                variables a lo largo del tiempo.</p>
+              <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary tool-btn">Probar simulador
+                &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Tool 2 -->
+          <div class="card card-tool">
+            <img src="public/batallaStr.png" alt="AI Showdown Simulator" class="tool-thumbnail" loading="lazy">
+            <div class="tool-content">
+              <span class="platform-label">Experimento AI</span>
+              <h3>Batalla de Portafolios AI</h3>
+              <p>Enfrentamos a diferentes inteligencias artificiales para ver cuál arma el mejor portafolio de
+                inversión. Analiza los resultados reales mes con mes.</p>
+              <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary tool-btn">Ver resultados
+                &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOBOTRACKER -->
+    <section id="lobotracker" class="section-lobotracker">
+      <div class="container">
+        <span class="section-label">LoboTracker</span>
+      </div>
+      <div class="container lobotracker-container">
+        <div class="lobo-header">
+          <span class="badge">📱 Disponible en iOS</span>
+          <p class="subtitle">Tu cochinito digital. Gastos, ingresos y ahorros — sin que te duela la cabeza.</p>
+        </div>
+
+        <div class="features-list">
+          <!-- Feature 1 -->
+          <div class="feature-row">
+            <div class="feature-text">
+              <h2>Tus datos son tuyos.</h2>
+              <p>Recolectamos absolutamente nada. Cero. Tu información nunca sale de tu dispositivo.</p>
+            </div>
+            <div class="feature-image right-desktop">
+              <img src="public/privacySq.png" alt="Privacidad en LoboTracker" loading="lazy">
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-row reverse">
+            <div class="feature-text">
+              <h2>Rápido. En serio.</h2>
+              <p>Registra una transacción en 3 segundos. Sin formularios, sin pasos innecesarios.</p>
+            </div>
+            <div class="feature-image left-desktop">
+              <img src="public/speedSq.png" alt="Velocidad en LoboTracker" loading="lazy">
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-row">
+            <div class="feature-text">
+              <h2>Tremendo valor.</h2>
+              <p>Cuesta menos que un solo caramel macchiato. Sin suscripciones, sin anuncios, sin sorpresas.</p>
+            </div>
+            <div class="feature-image right-desktop">
+              <img src="public/coffeeSq.png" alt="Valor de LoboTracker" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <div class="explainer-video">
+          <span class="video-label center">Mírala en acción</span>
+          <div class="video-wrapper">
+            <iframe width="337" height="599" src="https://www.youtube.com/embed/1b-XFtVPD5g"
+              title="Como utilizar LoboTracker para controlar tus gastos" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="cta-block-lobo">
+          <a href="https://apps.apple.com/us/app/lobotracker/id6756343539" target="_blank" rel="noopener noreferrer"
+            class="btn btn-primary btn-large">Descargar gratis en App Store</a>
+          <a href="#privacidad" class="link-secondary">Ver política de privacidad</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="section-contacto">
+      <div class="container container-sm">
+        <span class="section-label">Contacto</span>
+        <h2>¿Tienes una pregunta?</h2>
+        <p>No somos de los que desaparecen. Escríbenos y te respondemos.</p>
+        <a href="mailto:lobo.financiero.preguntas@gmail.com" class="email-link">lobo.financiero.preguntas@gmail.com</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-left">
+        <img src="public/loboLogo.png" alt="Logo" height="40">
+        <span class="footer-brand">El Lobo Financiero</span>
+      </div>
+      <div class="footer-center">
+        <span>Que el billete te acompañe 🐺</span>
+      </div>
+      <div class="footer-right">
+        <a href="https://www.tiktok.com/@ellobofinancierou" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <span class="dot">&middot;</span>
+        <a href="https://www.youtube.com/@ElLoboFinanciero" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <span class="dot">&middot;</span>
+        <a href="#privacidad">Política de Privacidad</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 El Lobo Financiero. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <!-- PRIVACIDAD -->
+  <section id="privacidad" class="section-privacidad">
+    <div class="container container-sm">
+      <span class="section-label">Política de Privacidad — LoboTracker</span>
+      <p class="last-updated">Última actualización: 12 de diciembre de 2025</p>
+
+      <h3>Recolección de Datos: Ninguna</h3>
+      <p>Toda tu información financiera permanece únicamente en tu dispositivo. No tenemos acceso técnico a ninguno de
+        tus datos.</p>
+      <p>Nuestro principio es simple: tus datos son tuyos.</p>
+
+      <p>Lo que NO hacemos:</p>
+      <ul>
+        <li>No requerimos creación de cuenta</li>
+        <li>No utilizamos almacenamiento en la nube ni sincronización</li>
+        <li>No recopilamos analíticas de uso, seguimiento del comportamiento ni utilizamos herramientas de terceros</li>
+        <li>No compartimos información con terceros</li>
+        <li>No mostramos anuncios ni realizamos seguimiento publicitario</li>
+        <li>No ofrecemos compras dentro de la app</li>
+      </ul>
+
+      <h3>Almacenamiento Local Exclusivo</h3>
+      <p>Tus datos se quedan en tu dispositivo. Nunca los recibimos, almacenamos ni accedemos a ellos. Si eliminas la
+        aplicación, tus datos se borran permanentemente.</p>
+
+      <h3>Descargo de Responsabilidad</h3>
+      <p>LoboTracker no puede recuperar tus datos en caso de pérdida. No somos responsables por la pérdida o robo de
+        información debido a: pérdida, robo o daño del dispositivo; eliminación de la aplicación; fallos o
+        actualizaciones del sistema operativo; acceso no autorizado a tu dispositivo; hackeo o malware. El usuario es
+        responsable de la seguridad de su dispositivo y de cualquier respaldo que realice por su cuenta.</p>
+
+      <h3>Uso previsto</h3>
+      <p>LoboTracker está diseñada exclusivamente para el registro personal de gastos. No debe utilizarse como única
+        fuente para decisiones financieras, fiscales o legales.</p>
+
+      <h3>Aceptación de esta Política</h3>
+      <p>El uso de LoboTracker implica la aceptación de esta Política de Privacidad.</p>
+
+      <p>Contacto: <a href="mailto:lobo.financiero.preguntas@gmail.com">lobo.financiero.preguntas@gmail.com</a></p>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+
+</html>
