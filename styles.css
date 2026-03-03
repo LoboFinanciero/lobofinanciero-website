@@ -666,32 +666,33 @@ h3 {
 /* ==========================================================================
    Privacidad
    ========================================================================== */
-.privacy-wrapper {
-    padding: 24px 0 40px;
-    background-color: var(--white);
-}
-
 .privacy-block {
     font-size: 0.8rem;
-    color: var(--text-body);
-    opacity: 0.55;
-    padding-top: 16px;
-    transition: opacity 0.2s;
+    color: rgba(255, 255, 255, 0.55);
+    padding-top: 8px;
+    text-align: center;
+    max-width: 600px;
+    transition: color 0.2s;
 }
 
 .privacy-block:hover {
-    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .privacy-block summary {
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
     list-style: none;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     user-select: none;
+}
+
+.privacy-block summary::-webkit-details-marker {
+    display: none;
 }
 
 .privacy-block summary::before {
@@ -705,13 +706,14 @@ h3 {
 }
 
 .privacy-block[open] summary {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     padding-bottom: 12px;
     margin-bottom: 12px;
 }
 
 .privacy-block[open] {
-    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: left;
 }
 
 .last-updated {
@@ -723,7 +725,7 @@ h3 {
 .privacy-block h3 {
     margin-top: 24px;
     margin-bottom: 8px;
-    color: var(--text-dark);
+    color: var(--white);
     font-size: 0.85rem;
 }
 
@@ -739,6 +741,16 @@ h3 {
 
 .privacy-block ul li {
     margin-bottom: 4px;
+}
+
+.privacy-block a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.privacy-block a:hover {
+    color: var(--white);
 }
 
 /* ==========================================================================
