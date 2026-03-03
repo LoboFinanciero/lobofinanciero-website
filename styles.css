@@ -666,9 +666,52 @@ h3 {
 /* ==========================================================================
    Privacidad
    ========================================================================== */
-.section-privacidad {
-    padding: 80px 0 100px;
+.privacy-wrapper {
+    padding: 24px 0 40px;
     background-color: var(--white);
+}
+
+.privacy-block {
+    font-size: 0.8rem;
+    color: var(--text-body);
+    opacity: 0.55;
+    padding-top: 16px;
+    transition: opacity 0.2s;
+}
+
+.privacy-block:hover {
+    opacity: 0.8;
+}
+
+.privacy-block summary {
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+}
+
+.privacy-block summary::before {
+    content: '▸';
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+}
+
+.privacy-block[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.privacy-block[open] summary {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.privacy-block[open] {
+    opacity: 0.8;
 }
 
 .last-updated {
@@ -677,26 +720,25 @@ h3 {
     margin-bottom: 32px;
 }
 
-.section-privacidad h3 {
-    margin-top: 40px;
-    margin-bottom: 16px;
-    color: var(--text-dark);
-}
-
-.section-privacidad p {
-    margin-bottom: 16px;
-    color: var(--text-body);
-}
-
-.section-privacidad ul {
-    list-style-type: disc;
-    padding-left: 24px;
-    margin-bottom: 24px;
-    color: var(--text-body);
-}
-
-.section-privacidad ul li {
+.privacy-block h3 {
+    margin-top: 24px;
     margin-bottom: 8px;
+    color: var(--text-dark);
+    font-size: 0.85rem;
+}
+
+.privacy-block p {
+    margin-bottom: 10px;
+}
+
+.privacy-block ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 16px;
+}
+
+.privacy-block ul li {
+    margin-bottom: 4px;
 }
 
 /* ==========================================================================
