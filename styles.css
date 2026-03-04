@@ -778,7 +778,7 @@ h3 {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    background: url('public/heroBG.png') center / cover no-repeat;
     opacity: 0.2;
     z-index: 1;
     pointer-events: none;
