@@ -12,6 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="public/favicon.png">
+  <link rel="apple-touch-icon" href="public/favicon-180.png">
+
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -40,8 +44,9 @@
   <main>
     <!-- HERO -->
     <header id="hero" class="hero-section">
+      <img src="public/heroBg.png" alt="" class="hero-bg-image">
       <div class="hero-bg-glow"></div>
-      <div class="container hero-content">
+      <div class="container hero-content reveal">
         <span class="eyebrow">Cazador de mitos financieros</span>
         <h1>
           <span class="h1-line1">Finanzas personales.</span><br>
@@ -61,15 +66,18 @@
     <!-- CONTENIDO -->
     <section id="contenido" class="section-contenido">
       <div class="container">
-        <span class="section-label">Contenido</span>
+        <span class="section-label reveal">Contenido</span>
         <h2>Aparezco en la portada!</h2>
         <p class="subtitle">Finanzas y economía — en TikTok y YouTube. Los experimentos financieros que no sabías que
           necesitabas.</p>
 
         <div class="cards-grid">
           <!-- TikTok Card -->
-          <div class="card card-tiktok">
-            <span class="platform-label">TikTok</span>
+          <div class="card card-tiktok reveal">
+            <div class="platform-header">
+              <img src="public/iconTiktok.png" alt="" class="platform-icon">
+              <span class="platform-label">TikTok</span>
+            </div>
             <h3>@ellobofinancierou</h3>
             <div class="stat-block">
               <span class="stat-number">4K</span>
@@ -80,8 +88,11 @@
           </div>
 
           <!-- YouTube Card -->
-          <div class="card card-youtube">
-            <span class="platform-label">YouTube</span>
+          <div class="card card-youtube reveal">
+            <div class="platform-header">
+              <img src="public/iconYoutube.png" alt="" class="platform-icon">
+              <span class="platform-label">YouTube</span>
+            </div>
             <h3>El Lobo Financiero</h3>
             <div class="stat-block">
               <span class="stat-number" id="yt-sub-count">1.5K</span>
@@ -96,14 +107,14 @@
 
     <!-- LABORATORIO (Streamlit) -->
     <section id="laboratorio" class="section-laboratorio">
-      <div class="container container-sm">
-        <span class="section-label">Laboratorio</span>
+      <div class="container">
+        <span class="section-label reveal">Laboratorio</span>
         <h2>Experimentos y Simuladores</h2>
         <p class="subtitle">Herramientas interactivas. Pruébalas ahora mismo.</p>
 
         <div class="tools-grid">
           <!-- Tool 1 -->
-          <div class="card card-tool">
+          <div class="card card-tool reveal">
             <img src="public/casaStr.png" alt="Home Buy vs Rent Simulator" class="tool-thumbnail" loading="lazy">
             <div class="tool-content">
               <span class="platform-label">Simulador interactivo</span>
@@ -117,7 +128,7 @@
           </div>
 
           <!-- Tool 2 -->
-          <div class="card card-tool">
+          <div class="card card-tool reveal">
             <img src="public/batallaStr.png" alt="AI Showdown Simulator" class="tool-thumbnail" loading="lazy">
             <div class="tool-content">
               <span class="platform-label">Experimento IA</span>
@@ -136,17 +147,17 @@
     <!-- LOBOTRACKER -->
     <section id="lobotracker" class="section-lobotracker">
       <div class="container">
-        <span class="section-label">LoboTracker</span>
+        <span class="section-label reveal">LoboTracker</span>
+        <h2>Controla tus gastos, ingresos y ahorros.</h2>
       </div>
       <div class="container lobotracker-container">
         <div class="lobo-header">
-          <span class="badge">📱 Disponible en iOS</span>
-          <p class="subtitle">Controla tus gastos, ingresos y ahorros.</p>
+          <span class="badge">Disponible en iOS</span>
         </div>
 
         <div class="features-list">
           <!-- Feature 1 -->
-          <div class="feature-row">
+          <div class="feature-row reveal">
             <div class="feature-text">
               <h2>Tus datos son tuyos.</h2>
               <p>Recolectamos absolutamente nada. Cero. Tu información nunca sale de tu dispositivo.</p>
@@ -157,7 +168,7 @@
           </div>
 
           <!-- Feature 2 -->
-          <div class="feature-row reverse">
+          <div class="feature-row reverse reveal">
             <div class="feature-text">
               <h2>Rápido. En serio.</h2>
               <p>Registra una transacción en 3 segundos. Sin formularios, sin pasos innecesarios.</p>
@@ -168,7 +179,7 @@
           </div>
 
           <!-- Feature 3 -->
-          <div class="feature-row">
+          <div class="feature-row reveal">
             <div class="feature-text">
               <h2>Tremendo valor.</h2>
               <p>Cuesta menos que un caramel macchiato. Sin suscripciones, sin anuncios, sin sorpresas.</p>
@@ -179,17 +190,17 @@
           </div>
         </div>
 
-        <div class="explainer-video">
+        <div class="explainer-video reveal">
           <span class="video-label center">¿Cómo funciona?</span>
           <div class="video-wrapper">
             <iframe width="337" height="599" src="https://www.youtube.com/embed/1b-XFtVPD5g"
-              title="Como utilizar LoboTracker para controlar tus gastos" frameborder="0"
+              title="Como utilizar LoboTracker" frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </div>
 
-        <div class="cta-block-lobo">
+        <div class="cta-block-lobo reveal">
           <a href="https://apps.apple.com/us/app/lobotracker/id6756343539" target="_blank" rel="noopener noreferrer"
             class="btn btn-primary btn-large">Comprar en App Store</a>
           <details class="privacy-block">
@@ -243,7 +254,7 @@
 
     <!-- CONTACTO -->
     <section id="contacto" class="section-contacto">
-      <div class="container container-sm">
+      <div class="container container-sm reveal">
         <span class="section-label">Contacto</span>
         <h2>¿Tienes preguntas?</h2>
         <p>Escríbenos y te respondemos en cuanto podamos.</p>
@@ -274,7 +285,7 @@
   </footer>
 
 
-  <script src="main.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
