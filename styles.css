@@ -544,7 +544,7 @@ h3 {
     align-items: center;
 }
 
-.explainer-video .video-label.center {
+.explainer-video h2 {
     text-align: center;
     margin-bottom: 24px;
 }
