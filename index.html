@@ -1,292 +1,668 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Lobo Financiero</title>
-  <meta name="description" content="Simulaciones, Python, datos. En busca de la verdad financiera.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Lobo Financiero</title>
+<meta name="description" content="Simulaciones, Python, datos. En busca de la verdad financiera.">
+<link rel="icon" type="image/png" href="public/favicon.png">
+<link rel="apple-touch-icon" href="public/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────────────────────────── */
+:root {
+  --ds:      #06091A;
+  --sky:     #08599D;
+  --coral:   #EC5C73;
+  --ducky:   #F9DC5C;
+  --white:   #F5F8FB;
+  --mint:    #00D4A8;
+  --skylt:   #3B8FD4;
+  --slate:   #6B7FA8;
+  --grid:    #1A2540;
+  --fg2:     #B0BDD4;
+  --fg3:     #6B7FA8;
+  --fg4:     #3B4F6A;
+  --light-bg:#F7F5F2;
+  --light-border: #E5E0D8;
+  --text-dark: #12161F;
+  --nav-h:   64px;
+  --max-w:   1100px;
+  --fd: 'DM Sans', sans-serif;
+  --fm: 'Fira Mono', monospace;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); font-family: var(--fd); }
+body { background: var(--ds); color: var(--white); overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
 
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+/* ── LAYOUT ─────────────────────────────────────────────────── */
+.container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="public/favicon.png">
-  <link rel="apple-touch-icon" href="public/favicon-180.png">
+/* ── NAV ─────────────────────────────────────────────────────── */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(6,9,26,0.97); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--grid);
+  height: var(--nav-h);
+}
+.nav-inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+  height: 100%; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand { display: flex; align-items: center; gap: 12px; }
+.nav-brand img { height: 44px; }
+.nav-brand span { font-weight: 700; font-size: 15px; color: var(--white); }
+.nav-links { display: flex; gap: 32px; }
+.nav-link { font-size: 13px; font-weight: 500; color: var(--white); opacity: 0.6; transition: opacity 0.15s; }
+.nav-link:hover { opacity: 1; color: var(--ducky); }
+.nav-link-highlight { color: var(--mint) !important; opacity: 0.9 !important; font-weight: 700 !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--white); transition: all 0.25s; }
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
+/* ── HERO ────────────────────────────────────────────────────── */
+.hero {
+  background-color: var(--ds);
+  background-image:
+    linear-gradient(rgba(8,89,157,0.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8,89,157,0.13) 1px, transparent 1px);
+  background-size: 44px 44px;
+  min-height: 520px;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('public/heroBG.png') center/cover no-repeat;
+  opacity: 0.07; pointer-events: none;
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  width: 100%; max-width: var(--max-w); margin: 0 auto;
+  padding: 48px 24px 52px;
+  display: grid; grid-template-columns: 1fr 240px; gap: 0; align-items: stretch;
+}
+.hero-content { display: flex; flex-direction: column; justify-content: center; padding-right: 48px; }
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+}
+.hero-eyebrow .line { width: 28px; height: 2px; background: var(--coral); flex-shrink: 0; }
+.hero-eyebrow span {
+  font-family: var(--fm); font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--coral);
+}
+.hero h1 {
+  font-family: var(--fd); font-weight: 800;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.0; letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.hero h1 .line1 { color: var(--white); display: block; }
+.hero h1 .line2 { color: var(--skylt); display: block; }
+.hero-body {
+  font-size: 15px; color: var(--fg2); line-height: 1.7;
+  max-width: 440px; margin-bottom: 36px;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 13px 26px; font-family: var(--fd); font-weight: 700;
+  font-size: 13px; cursor: pointer; transition: filter 0.15s, transform 0.15s;
+  border: none; border-radius: 0;
+}
+.btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.btn-primary { background: var(--coral); color: var(--white); }
+.btn-sky     { background: var(--sky); color: var(--white); }
+.btn-outline { background: transparent; color: var(--fg3); border: 1px solid var(--grid); }
+.btn-outline:hover { color: var(--white); border-color: var(--slate); }
+.btn-mint    { background: var(--mint); color: var(--ds); font-weight: 800; }
+.btn-dark    { background: var(--text-dark); color: var(--white); }
+.btn-ducky   { background: var(--ducky); color: var(--text-dark); }
+.btn-large   { padding: 16px 32px; font-size: 15px; }
+
+/* Hero stat panel */
+.hero-stats {
+  border-left: 1px solid var(--grid);
+  display: flex; flex-direction: column;
+}
+.hero-stat-header {
+  background: var(--coral); padding: 10px 20px;
+  font-family: var(--fm); font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.8);
+}
+.hero-stat-item {
+  padding: 18px 20px; border-bottom: 1px solid var(--grid);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.hero-stat-item:last-child { border-bottom: none; flex: 1; }
+.stat-n { font-family: var(--fm); font-weight: 700; font-size: 28px; line-height: 1; }
+.stat-l { font-family: var(--fd); font-size: 11px; color: var(--fg3); margin-top: 2px; }
+
+/* Mobile stat strip (hidden on desktop) */
+.hero-stat-strip { display: none; }
+
+/* ── SECTION SHARED ──────────────────────────────────────────── */
+.section { padding: 72px 0; }
+.section.light { background: var(--light-bg); color: var(--text-dark); }
+.section.dark  { background: var(--ds); }
+.section.mid   { background: #0B1628; }
+
+.section-eyebrow {
+  display: flex; align-items: center; gap: 0; margin-bottom: 12px;
+}
+.section-tag {
+  font-family: var(--fm); font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+}
+.section.light .section-tag { color: var(--coral); }
+.section.dark  .section-tag { color: var(--coral); }
+.section.mid   .section-tag { color: var(--coral); }
+
+.section-title {
+  font-family: var(--fd); font-weight: 800;
+  font-size: clamp(28px, 3.5vw, 44px);
+  line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 12px;
+}
+.section.light .section-title { color: var(--text-dark); }
+.section.dark  .section-title { color: var(--white); }
+.section.mid   .section-title { color: var(--white); }
+
+.section-sub {
+  font-size: 15px; line-height: 1.7; max-width: 560px; margin-bottom: 48px;
+}
+.section.light .section-sub { color: #5A5050; }
+.section.dark  .section-sub { color: var(--fg2); }
+.section.mid   .section-sub { color: var(--fg2); }
+
+/* ── CONTENIDO ───────────────────────────────────────────────── */
+.cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+
+.platform-card {
+  padding: 36px; display: flex; flex-direction: column; gap: 18px;
+  transition: filter 0.2s;
+}
+.platform-card:hover { filter: brightness(1.05); }
+.card-tiktok { background: var(--ds); border: 1px solid var(--grid); }
+.card-youtube { background: var(--sky); }
+
+.platform-header { display: flex; align-items: center; gap: 10px; }
+.platform-icon { width: 34px; height: 34px; object-fit: contain; }
+.platform-name {
+  font-family: var(--fm); font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.7);
+}
+.card-handle { font-weight: 800; font-size: 20px; color: var(--white); }
+.card-stat-n { font-family: var(--fm); font-weight: 700; font-size: 44px; color: var(--ducky); line-height: 1; }
+.card-stat-l { font-family: var(--fd); font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.btn-pill {
+  display: inline-flex; align-items: center; padding: 10px 20px;
+  background: rgba(255,255,255,0.1); color: var(--white);
+  font-family: var(--fd); font-weight: 700; font-size: 12px;
+  border: 1px solid rgba(255,255,255,0.15); transition: background 0.15s;
+  border-radius: 0; align-self: flex-start;
+}
+.btn-pill:hover { background: rgba(255,255,255,0.18); }
+
+/* ── LABORATORIO ─────────────────────────────────────────────── */
+.tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.tool-card {
+  background: var(--white); color: var(--text-dark);
+  display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid var(--light-border); transition: transform 0.2s;
+}
+.tool-card:hover { transform: translateY(-3px); }
+.tool-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.tool-body { padding: 28px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.tool-type {
+  font-family: var(--fm); font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral);
+}
+.tool-title { font-weight: 800; font-size: 20px; color: var(--text-dark); }
+.tool-desc { font-size: 13px; color: #5A5050; line-height: 1.6; flex: 1; }
+
+/* ── LOBOTRACKER ─────────────────────────────────────────────── */
+.tracker-wrap {
+  background: var(--ds);
+  background-image: linear-gradient(rgba(8,89,157,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(8,89,157,0.1) 1px,transparent 1px);
+  background-size: 44px 44px;
+  padding: 72px 0 96px;
+}
+.tracker-header { margin-bottom: 64px; }
+.badge-ios {
+  display: inline-block;
+  background: var(--ducky); color: var(--ds);
+  font-family: var(--fm); font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 4px 14px; margin-bottom: 20px;
+}
+.features { display: flex; flex-direction: column; gap: 0; }
+.feature-row {
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+  border-top: 1px solid var(--grid); padding: 56px 0; gap: 64px;
+}
+.feature-row.flip { direction: rtl; }
+.feature-row.flip > * { direction: ltr; }
+.feature-text { display: flex; flex-direction: column; gap: 16px; }
+.feature-number {
+  font-family: var(--fm); font-weight: 700; font-size: 11px;
+  color: var(--coral); text-transform: uppercase; letter-spacing: 0.12em;
+}
+.feature-title {
+  font-family: var(--fd); font-weight: 800;
+  font-size: clamp(28px, 3vw, 40px); line-height: 1.05;
+  letter-spacing: -0.02em; color: var(--white);
+}
+.feature-body { font-size: 15px; color: var(--fg2); line-height: 1.7; max-width: 400px; }
+.feature-img {
+  position: relative; display: flex; justify-content: center;
+}
+.feature-img img {
+  width: 100%; max-width: 340px;
+  /* sharp no rounding */
+}
+
+/* Video */
+.video-section { padding: 72px 0; border-top: 1px solid var(--grid); }
+.video-title { font-weight: 800; font-size: 32px; color: var(--white); text-align: center; margin-bottom: 32px; }
+.video-wrap {
+  max-width: 340px; margin: 0 auto;
+  aspect-ratio: 9/16; overflow: hidden;
+  border: 1px solid var(--grid);
+}
+.video-wrap iframe { width: 100%; height: 100%; border: none; }
+
+/* CTA block */
+.cta-block {
+  margin-top: 72px; padding-top: 72px; border-top: 1px solid var(--grid);
+  display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;
+}
+.cta-block .btn { font-size: 16px; padding: 18px 40px; }
+
+/* Privacy */
+.privacy-toggle {
+  font-family: var(--fm); font-size: 11px; color: var(--fg4);
+  cursor: pointer; list-style: none; display: flex; align-items: center;
+  gap: 6px; user-select: none; transition: color 0.15s;
+}
+.privacy-toggle:hover { color: var(--fg2); }
+details[open] .privacy-toggle { color: var(--fg2); }
+.privacy-content {
+  font-size: 12px; color: var(--fg3); line-height: 1.7;
+  max-width: 560px; text-align: left; padding-top: 20px;
+}
+.privacy-content h3 { font-size: 13px; color: var(--fg2); margin: 20px 0 6px; font-weight: 700; }
+.privacy-content p { margin-bottom: 8px; }
+.privacy-content ul { padding-left: 16px; margin-bottom: 12px; list-style: disc; }
+.privacy-content a { color: var(--skylt); text-decoration: underline; }
+
+/* ── CONTACTO ────────────────────────────────────────────────── */
+.section-contacto {
+  background: var(--light-bg); border-top: 3px solid var(--coral);
+  padding: 100px 0; text-align: center;
+}
+.contacto-title {
+  font-weight: 800; font-size: clamp(28px, 4vw, 48px);
+  color: var(--text-dark); margin-bottom: 12px; letter-spacing: -0.02em;
+}
+.contacto-sub { font-size: 15px; color: #5A5050; margin-bottom: 32px; }
+.email-link {
+  font-family: var(--fm); font-weight: 700;
+  font-size: clamp(14px, 2vw, 20px); color: var(--sky);
+  text-decoration: underline; text-underline-offset: 6px;
+  transition: color 0.15s;
+}
+.email-link:hover { color: var(--coral); }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+footer {
+  background: var(--ds); border-top: 1px solid var(--grid);
+  padding: 48px 0 24px;
+}
+.footer-inner {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  align-items: center; margin-bottom: 40px;
+}
+.footer-brand { display: flex; align-items: center; gap: 12px; }
+.footer-brand img { height: 36px; }
+.footer-brand span { font-weight: 700; font-size: 14px; color: var(--white); }
+.footer-center { text-align: center; font-family: var(--fm); font-size: 11px; color: var(--fg4); }
+.footer-links { display: flex; justify-content: flex-end; gap: 16px; }
+.footer-links a { font-size: 13px; color: var(--fg3); transition: color 0.15s; }
+.footer-links a:hover { color: var(--coral); }
+.footer-copy { text-align: center; font-family: var(--fm); font-size: 10px; color: var(--fg4); border-top: 1px solid var(--grid); padding-top: 20px; }
+
+/* ── REVEAL ANIMATION ────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── MOBILE ──────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed; top: var(--nav-h); left: 0; right: 0;
+    background: rgba(6,9,26,0.98); flex-direction: column;
+    padding: 24px; gap: 20px;
+    transform: translateY(-100%); opacity: 0; visibility: hidden;
+    transition: all 0.25s; border-bottom: 1px solid var(--grid);
+  }
+  .nav-links.open { transform: none; opacity: 1; visibility: visible; }
+  .nav-link { font-size: 16px; opacity: 0.75; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Hero */
+  .hero-inner { grid-template-columns: 1fr; padding: 60px 24px 40px; }
+  .hero-content { padding-right: 0; }
+  .hero-stats { display: none; }
+  .hero-stat-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--grid); margin-top: 40px; gap: 0;
+  }
+  .hero-stat-strip-item {
+    padding: 16px 12px; border-right: 1px solid var(--grid); text-align: center;
+  }
+  .hero-stat-strip-item:last-child { border-right: none; }
+  .hero-stat-strip-item .stat-n { font-size: 20px; }
+  .hero-stat-strip-item .stat-l { font-size: 10px; }
+
+  /* Sections */
+  .cards-grid, .tools-grid { grid-template-columns: 1fr; }
+  .feature-row { grid-template-columns: 1fr; gap: 32px; padding: 40px 0; }
+  .feature-row.flip { direction: ltr; }
+  .feature-img img { max-width: 100%; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+  .footer-brand { justify-content: center; }
+  .footer-links { justify-content: center; }
+
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas .btn { width: 100%; }
+}
+
+@media (max-width: 540px) {
+  .hero-stat-strip { grid-template-columns: repeat(2, 1fr); }
+  .hero-stat-strip-item:nth-child(2) { border-right: none; }
+  .hero-stat-strip-item:nth-child(3) { border-top: 1px solid var(--grid); border-right: 1px solid var(--grid); }
+  .hero-stat-strip-item:nth-child(4) { border-top: 1px solid var(--grid); border-right: none; }
+}
+</style>
 </head>
-
 <body>
 
-  <!-- NAV -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-brand">
-        <img src="public/loboLogo.png" alt="El Lobo Financiero Logo" height="52">
-        <span class="brand-text">El Lobo Financiero</span>
-      </a>
-      <div class="nav-links" id="nav-links">
-        <a href="#contenido" class="nav-link">Contenido</a>
-        <a href="#laboratorio" class="nav-link">Laboratorio</a>
-        <a href="#lobotracker" class="nav-link">LoboTracker</a>
-        <a href="#contacto" class="nav-link">Contacto</a>
-      </div>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <img src="public/loboLogo.png" alt="El Lobo Financiero">
+      <span>El Lobo Financiero</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#contenido"    class="nav-link">Contenido</a>
+      <a href="#laboratorio"  class="nav-link">Laboratorio</a>
+      <a href="#lobotracker"  class="nav-link nav-link-highlight">LoboTracker</a>
+      <a href="#contacto"     class="nav-link">Contacto</a>
     </div>
-  </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-  <main>
-    <!-- HERO -->
-    <header id="hero" class="hero-section">
-      <div class="hero-bg-image"></div>
-      <div class="hero-bg-glow"></div>
-      <div class="container hero-content reveal">
-        <span class="eyebrow">Cazador de mitos financieros</span>
-        <h1>
-          <span class="h1-line1">Finanzas personales.</span><br>
-          <span class="h1-line2">Con datos.</span>
-        </h1>
-        <p class="hero-body">
-          Simulaciones, Python, información.<br>
-          En busca de la verdad financiera.
-        </p>
-        <div class="hero-ctas">
-          <a href="#contenido" class="btn btn-primary">Ver el contenido</a>
-          <a href="#laboratorio" class="btn btn-blue">Ir al Laboratorio</a>
-          <a href="#lobotracker" class="btn btn-outline">Descargar LoboTracker</a>
-        </div>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <!-- Left: content -->
+    <div class="hero-content reveal">
+      <div class="hero-eyebrow">
+        <div class="line"></div>
+        <span>Cazador de mitos financieros</span>
       </div>
-    </header>
-
-    <!-- CONTENIDO -->
-    <section id="contenido" class="section-contenido">
-      <div class="container">
-        <span class="section-label reveal">Contenido</span>
-        <h2>Aparezco en la portada!</h2>
-        <p class="subtitle">Finanzas y economía — en TikTok y YouTube. Los experimentos financieros que no sabías que
-          necesitabas.</p>
-
-        <div class="cards-grid">
-          <!-- TikTok Card -->
-          <div class="card card-tiktok reveal">
-            <div class="platform-header">
-              <img src="public/iconTiktok.png" alt="" class="platform-icon">
-              <span class="platform-label">TikTok</span>
-            </div>
-            <h3>@ellobofinancierou</h3>
-            <div class="stat-block">
-              <span class="stat-number">4.5K</span>
-              <span class="stat-sublabel">seguidores y contando</span>
-            </div>
-            <a href="https://www.tiktok.com/@ellobofinancierou" target="_blank" rel="noopener noreferrer"
-              class="btn btn-pill">Abrir en TikTok &rarr;</a>
-          </div>
-
-          <!-- YouTube Card -->
-          <div class="card card-youtube reveal">
-            <div class="platform-header">
-              <img src="public/iconYoutube.png" alt="" class="platform-icon">
-              <span class="platform-label">YouTube</span>
-            </div>
-            <h3>El Lobo Financiero</h3>
-            <div class="stat-block">
-              <span class="stat-number" id="yt-sub-count">1.5K</span>
-              <span class="stat-sublabel">suscriptores</span>
-            </div>
-            <a href="https://www.youtube.com/@ElLoboFinanciero" target="_blank" rel="noopener noreferrer"
-              class="btn btn-pill">Abrir en YouTube &rarr;</a>
-          </div>
-        </div>
+      <h1>
+        <span class="line1">Finanzas personales.</span>
+        <span class="line2">Con datos.</span>
+      </h1>
+      <p class="hero-body">Simulaciones, Python, información.<br>En busca de la verdad financiera.</p>
+      <div class="hero-ctas">
+        <a href="#contenido"   class="btn btn-primary">Ver el contenido</a>
+        <a href="#laboratorio" class="btn btn-sky">Laboratorio</a>
+        <a href="#lobotracker" class="btn btn-mint">LoboTracker</a>
       </div>
-    </section>
-
-    <!-- LABORATORIO (Streamlit) -->
-    <section id="laboratorio" class="section-laboratorio">
-      <div class="container">
-        <span class="section-label reveal">Laboratorio</span>
-        <h2>Experimentos y Simuladores</h2>
-        <p class="subtitle">Herramientas interactivas. Pruébalas ahora mismo.</p>
-
-        <div class="tools-grid">
-          <!-- Tool 1 -->
-          <div class="card card-tool reveal">
-            <img src="public/casaStr.png" alt="Home Buy vs Rent Simulator" class="tool-thumbnail" loading="lazy">
-            <div class="tool-content">
-              <span class="platform-label">Simulador interactivo</span>
-              <h3>Comprar vs. Rentar</h3>
-              <p>Analiza el costo real de comprar casa frente a rentar e invertir la diferencia a través de múltiples
-                variables a lo largo del tiempo.</p>
-              <a href="https://lobocasa.streamlit.app" target="_blank" rel="noopener noreferrer"
-                class="btn btn-primary tool-btn">Usar simulador
-                &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Tool 2 -->
-          <div class="card card-tool reveal">
-            <img src="public/batallaStr.png" alt="AI Showdown Simulator" class="tool-thumbnail" loading="lazy">
-            <div class="tool-content">
-              <span class="platform-label">Experimento IA</span>
-              <h3>Batalla de Portafolios</h3>
-              <p>Enfrentamos a diferentes inteligencias artificiales para ver cuál arma el mejor portafolio de
-                inversión. Corriendo en vivo.</p>
-              <a href="https://lobofinanciero.streamlit.app" target="_blank" rel="noopener noreferrer"
-                class="btn btn-primary tool-btn">Ver resultados
-                &rarr;</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LOBOTRACKER -->
-    <section id="lobotracker" class="section-lobotracker">
-      <div class="container">
-        <span class="section-label reveal">LoboTracker</span>
-        <h2>Controla tus gastos, ingresos y ahorros.</h2>
-      </div>
-      <div class="container lobotracker-container">
-        <div class="lobo-header">
-          <span class="badge">Disponible en iOS</span>
-        </div>
-
-        <div class="features-list">
-          <!-- Feature 1 -->
-          <div class="feature-row reveal">
-            <div class="feature-text">
-              <h2>Tus datos son tuyos.</h2>
-              <p>Recolectamos absolutamente nada. Cero. Tu información nunca sale de tu dispositivo.</p>
-            </div>
-            <div class="feature-image right-desktop">
-              <img src="public/privacySq.jpg" alt="Privacidad en LoboTracker" loading="lazy">
-            </div>
-          </div>
-
-          <!-- Feature 2 -->
-          <div class="feature-row reverse reveal">
-            <div class="feature-text">
-              <h2>Rápido. En serio.</h2>
-              <p>Registra una transacción en 3 segundos. Sin formularios, sin pasos innecesarios.</p>
-            </div>
-            <div class="feature-image left-desktop">
-              <img src="public/speedSq.jpg" alt="Velocidad en LoboTracker" loading="lazy">
-            </div>
-          </div>
-
-          <!-- Feature 3 -->
-          <div class="feature-row reveal">
-            <div class="feature-text">
-              <h2>Tremendo valor.</h2>
-              <p>Cuesta menos que un caramel macchiato. Paga una vez, úsalo para siempre.</p>
-            </div>
-            <div class="feature-image right-desktop">
-              <img src="public/coffeeSq.jpg" alt="Valor de LoboTracker" loading="lazy">
-            </div>
-          </div>
-        </div>
-
-        <div class="explainer-video reveal">
-          <h2>¿Cómo funciona?</h2>
-          <div class="video-wrapper">
-            <iframe width="337" height="599" src="https://www.youtube.com/embed/1b-XFtVPD5g"
-              title="Como utilizar LoboTracker" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-        </div>
-
-        <div class="cta-block-lobo reveal">
-          <a href="https://apps.apple.com/us/app/lobotracker/id6756343539" target="_blank" rel="noopener noreferrer"
-            class="btn btn-primary btn-large">Comprar en App Store</a>
-          <details class="privacy-block">
-            <summary>Ver política de privacidad</summary>
-            <p class="last-updated">Última actualización: 12 de diciembre de 2025</p>
-
-            <h3>Recolección de Datos: Ninguna</h3>
-            <p>Toda tu información financiera permanece únicamente en tu dispositivo. No tenemos acceso técnico a
-              ninguno de
-              tus datos.</p>
-            <p>Nuestro principio es simple: tus datos son tuyos.</p>
-
-            <p>Lo que NO hacemos:</p>
-            <ul>
-              <li>No requerimos creación de cuenta</li>
-              <li>No utilizamos almacenamiento en la nube ni sincronización</li>
-              <li>No recopilamos analíticas de uso, seguimiento del comportamiento ni utilizamos herramientas de
-                terceros</li>
-              <li>No compartimos información con terceros</li>
-              <li>No mostramos anuncios ni realizamos seguimiento publicitario</li>
-              <li>No ofrecemos compras dentro de la app</li>
-            </ul>
-
-            <h3>Almacenamiento Local Exclusivo</h3>
-            <p>Tus datos se quedan en tu dispositivo. Nunca los recibimos, almacenamos ni accedemos a ellos. Si eliminas
-              la
-              aplicación, tus datos se borran permanentemente.</p>
-
-            <h3>Descargo de Responsabilidad</h3>
-            <p>LoboTracker no puede recuperar tus datos en caso de pérdida. No somos responsables por la pérdida o robo
-              de
-              información debido a: pérdida, robo o daño del dispositivo; eliminación de la aplicación; fallos o
-              actualizaciones del sistema operativo; acceso no autorizado a tu dispositivo; hackeo o malware. El usuario
-              es
-              responsable de la seguridad de su dispositivo y de cualquier respaldo que realice por su cuenta.</p>
-
-            <h3>Uso previsto</h3>
-            <p>LoboTracker está diseñada exclusivamente para el registro personal de gastos. No debe utilizarse como
-              única
-              fuente para decisiones financieras, fiscales o legales.</p>
-
-            <h3>Aceptación de esta Política</h3>
-            <p>El uso de LoboTracker implica la aceptación de esta Política de Privacidad.</p>
-
-            <p>Contacto: <a href="mailto:lobo.financiero.preguntas@gmail.com">lobo.financiero.preguntas@gmail.com</a>
-            </p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACTO -->
-    <section id="contacto" class="section-contacto">
-      <div class="container container-sm reveal">
-        <span class="section-label">Contacto</span>
-        <h2>¿Tienes preguntas?</h2>
-        <p>Escríbenos y te respondemos en cuanto podamos.</p>
-        <a href="mailto:lobo.financiero.preguntas@gmail.com" class="email-link">lobo.financiero.preguntas@gmail.com</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-left">
-        <img src="public/loboLogo.png" alt="Logo" height="40">
-        <span class="footer-brand">El Lobo Financiero</span>
-      </div>
-      <div class="footer-center">
-        <span>Que el billete te acompañe 🐺</span>
-      </div>
-      <div class="footer-right">
-        <a href="https://www.tiktok.com/@ellobofinancierou" target="_blank" rel="noopener noreferrer">TikTok</a>
-        <span class="dot">&middot;</span>
-        <a href="https://www.youtube.com/@ElLoboFinanciero" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <!-- Mobile stat strip -->
+      <div class="hero-stat-strip">
+        <div class="hero-stat-strip-item"><div class="stat-n" style="color:var(--coral)">4.5K</div><div class="stat-l">TikTok</div></div>
+        <div class="hero-stat-strip-item"><div class="stat-n" style="color:var(--skylt)">1.5K</div><div class="stat-l">YouTube</div></div>
+        <div class="hero-stat-strip-item"><div class="stat-n" style="color:var(--mint)">2</div><div class="stat-l">Simuladores</div></div>
+        <div class="hero-stat-strip-item"><div class="stat-n" style="color:var(--ducky)">1</div><div class="stat-l">iOS App</div></div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 El Lobo Financiero. Todos los derechos reservados.</span>
+    <!-- Right: stat panel (desktop only) -->
+    <div class="hero-stats reveal">
+      <div class="hero-stat-header">Estado del canal</div>
+      <div class="hero-stat-item">
+        <div class="stat-n" style="color:var(--coral)">4.5K</div>
+        <div class="stat-l">seguidores TikTok</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="stat-n" style="color:var(--skylt)">1.5K</div>
+        <div class="stat-l">suscriptores YouTube</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="stat-n" style="color:var(--mint)">2</div>
+        <div class="stat-l">simuladores en vivo</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="stat-n" style="color:var(--ducky)">1</div>
+        <div class="stat-l">app en iOS</div>
+      </div>
     </div>
-  </footer>
+  </div>
+</header>
 
+<!-- CONTENIDO -->
+<section id="contenido" class="section dark">
+  <div class="container">
+    <div class="section-eyebrow"><span class="section-tag">Contenido</span></div>
+    <h2 class="section-title reveal">¡Aparezco en la portada!</h2>
+    <p class="section-sub reveal">Finanzas y economía — en TikTok y YouTube. Los experimentos financieros que no sabías que necesitabas.</p>
+    <div class="cards-grid reveal">
+      <!-- TikTok -->
+      <div class="platform-card card-tiktok">
+        <div class="platform-header">
+          <img src="public/iconTiktok.png" alt="TikTok" class="platform-icon">
+          <span class="platform-name">TikTok</span>
+        </div>
+        <div class="card-handle">@ellobofinancierou</div>
+        <div>
+          <div class="card-stat-n">4.5K</div>
+          <div class="card-stat-l">seguidores y contando</div>
+        </div>
+        <a href="https://www.tiktok.com/@ellobofinancierou" target="_blank" rel="noopener" class="btn-pill">Abrir en TikTok →</a>
+      </div>
+      <!-- YouTube -->
+      <div class="platform-card card-youtube">
+        <div class="platform-header">
+          <img src="public/iconYoutube.png" alt="YouTube" class="platform-icon">
+          <span class="platform-name">YouTube</span>
+        </div>
+        <div class="card-handle">El Lobo Financiero</div>
+        <div>
+          <div class="card-stat-n" id="yt-sub-count">1.5K</div>
+          <div class="card-stat-l">suscriptores</div>
+        </div>
+        <a href="https://www.youtube.com/@ElLoboFinanciero" target="_blank" rel="noopener" class="btn-pill">Abrir en YouTube →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- LABORATORIO -->
+<section id="laboratorio" class="section light">
+  <div class="container">
+    <div class="section-eyebrow"><span class="section-tag" style="color:var(--coral)">Laboratorio</span></div>
+    <h2 class="section-title reveal">Experimentos y Simuladores</h2>
+    <p class="section-sub reveal" style="color:#5A5050;">Herramientas interactivas. Pruébalas ahora mismo.</p>
+    <div class="tools-grid reveal">
+      <div class="tool-card">
+        <img src="public/casaStr.png" alt="Comprar vs Rentar" class="tool-thumb" loading="lazy">
+        <div class="tool-body">
+          <span class="tool-type">Simulador interactivo</span>
+          <div class="tool-title">Comprar vs. Rentar</div>
+          <p class="tool-desc">Analiza el costo real de comprar casa frente a rentar e invertir la diferencia a través de múltiples variables a lo largo del tiempo.</p>
+          <a href="https://lobocasa.streamlit.app" target="_blank" rel="noopener" class="btn btn-primary" style="align-self:flex-start; margin-top:8px;">Usar simulador →</a>
+        </div>
+      </div>
+      <div class="tool-card">
+        <img src="public/batallaStr.png" alt="Batalla de Portafolios" class="tool-thumb" loading="lazy">
+        <div class="tool-body">
+          <span class="tool-type">Experimento IA</span>
+          <div class="tool-title">Batalla de Portafolios</div>
+          <p class="tool-desc">Enfrentamos a diferentes inteligencias artificiales para ver cuál arma el mejor portafolio de inversión. Corriendo en vivo.</p>
+          <a href="https://lobofinanciero.streamlit.app" target="_blank" rel="noopener" class="btn btn-primary" style="align-self:flex-start; margin-top:8px;">Ver resultados →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOBOTRACKER -->
+<section id="lobotracker" class="tracker-wrap">
+  <div class="container">
+    <div class="tracker-header reveal">
+      <div class="badge-ios">Disponible en iOS</div>
+      <div class="section-eyebrow"><span class="section-tag">LoboTracker</span></div>
+      <h2 class="section-title">Controla tus gastos,<br>ingresos y ahorros.</h2>
+    </div>
+
+    <div class="features">
+      <!-- Feature 1 -->
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <div class="feature-number">01 — Privacidad</div>
+          <div class="feature-title">Tus datos son tuyos.</div>
+          <p class="feature-body">Recolectamos absolutamente nada. Cero. Tu información nunca sale de tu dispositivo.</p>
+        </div>
+        <div class="feature-img">
+          <img src="public/privacySq.jpg" alt="Privacidad" loading="lazy">
+        </div>
+      </div>
+      <!-- Feature 2 -->
+      <div class="feature-row flip reveal">
+        <div class="feature-text">
+          <div class="feature-number">02 — Velocidad</div>
+          <div class="feature-title">Rápido.<br>En serio.</div>
+          <p class="feature-body">Registra una transacción en 3 segundos. Sin formularios, sin pasos innecesarios.</p>
+        </div>
+        <div class="feature-img">
+          <img src="public/speedSq.jpg" alt="Velocidad" loading="lazy">
+        </div>
+      </div>
+      <!-- Feature 3 -->
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <div class="feature-number">03 — Valor</div>
+          <div class="feature-title">Tremendo valor.</div>
+          <p class="feature-body">Cuesta menos que un caramel macchiato. Paga una vez, úsalo para siempre.</p>
+        </div>
+        <div class="feature-img">
+          <img src="public/coffeeSq.jpg" alt="Valor" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- Video -->
+    <div class="video-section reveal">
+      <div class="video-title">¿Cómo funciona?</div>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/1b-XFtVPD5g" title="Como utilizar LoboTracker" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block reveal">
+      <a href="https://apps.apple.com/us/app/lobotracker/id6756343539" target="_blank" rel="noopener" class="btn btn-primary btn-large">Comprar en App Store</a>
+      <details>
+        <summary class="privacy-toggle">▸ Ver política de privacidad</summary>
+        <div class="privacy-content">
+          <p class="last-updated" style="font-size:11px;opacity:0.6;margin-bottom:20px;">Última actualización: 12 de diciembre de 2025</p>
+          <h3>Recolección de Datos: Ninguna</h3>
+          <p>Toda tu información financiera permanece únicamente en tu dispositivo. No tenemos acceso técnico a ninguno de tus datos. Nuestro principio es simple: tus datos son tuyos.</p>
+          <p>Lo que NO hacemos:</p>
+          <ul>
+            <li>No requerimos creación de cuenta</li>
+            <li>No utilizamos almacenamiento en la nube ni sincronización</li>
+            <li>No recopilamos analíticas de uso ni herramientas de terceros</li>
+            <li>No compartimos información con terceros</li>
+            <li>No mostramos anuncios ni realizamos seguimiento publicitario</li>
+          </ul>
+          <h3>Almacenamiento Local Exclusivo</h3>
+          <p>Tus datos se quedan en tu dispositivo. Si eliminas la aplicación, tus datos se borran permanentemente.</p>
+          <p>Contacto: <a href="mailto:lobo.financiero.preguntas@gmail.com">lobo.financiero.preguntas@gmail.com</a></p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="section-contacto">
+  <div class="container reveal">
+    <div class="section-tag" style="color:var(--coral); font-family:var(--fm); font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; margin-bottom:16px;">Contacto</div>
+    <div class="contacto-title">¿Tienes preguntas?</div>
+    <p class="contacto-sub">Escríbenos y te respondemos en cuanto podamos.</p>
+    <a href="mailto:lobo.financiero.preguntas@gmail.com" class="email-link">lobo.financiero.preguntas@gmail.com</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="public/loboLogo.png" alt="Logo">
+        <span>El Lobo Financiero</span>
+      </div>
+      <div class="footer-center">Que el billete te acompañe 🐺</div>
+      <div class="footer-links">
+        <a href="https://www.tiktok.com/@ellobofinancierou" target="_blank" rel="noopener">TikTok</a>
+        <span style="opacity:0.2">·</span>
+        <a href="https://www.youtube.com/@ElLoboFinanciero" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 El Lobo Financiero. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script>
+// Nav hamburger
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+  hamburger.classList.remove('open');
+  navLinks.classList.remove('open');
+}));
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Privacy details toggle arrow
+document.querySelectorAll('details').forEach(d => {
+  d.addEventListener('toggle', () => {
+    const s = d.querySelector('summary');
+    if (s) s.textContent = (d.open ? '▾ ' : '▸ ') + 'Ver política de privacidad';
+  });
+});
+</script>
 </body>
-
 </html>
