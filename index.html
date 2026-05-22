@@ -60,6 +60,7 @@ a { text-decoration: none; color: inherit; }
 .nav-link { font-size: 13px; font-weight: 500; color: var(--white); opacity: 0.6; transition: opacity 0.15s; }
 .nav-link:hover { opacity: 1; color: var(--ducky); }
 .nav-link-highlight { color: var(--mint) !important; opacity: 0.9 !important; font-weight: 700 !important; }
+.nav-link-ducky     { color: var(--ducky) !important; opacity: 0.9 !important; font-weight: 700 !important; }
 .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
 .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); transition: all 0.25s; }
 
@@ -223,6 +224,50 @@ a { text-decoration: none; color: inherit; }
 .tool-title { font-weight: 800; font-size: 20px; color: var(--text-dark); }
 .tool-desc { font-size: 13px; color: #5A5050; line-height: 1.6; flex: 1; }
 
+/* ── LOBOREPORTE ─────────────────────────────────────────────── */
+.report-grid {
+  display: grid; grid-template-columns: 340px 1fr; gap: 56px; align-items: start;
+}
+.report-img img {
+  width: 100%; max-width: 340px;
+  border: 1px solid var(--grid);
+}
+.report-content { display: flex; flex-direction: column; gap: 24px; }
+.report-bullets { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.report-bullets li {
+  font-size: 15px; color: var(--fg2); line-height: 1.6;
+  padding-left: 22px; position: relative;
+}
+.report-bullets li::before {
+  content: "→"; position: absolute; left: 0; top: 0;
+  color: var(--ducky); font-weight: 700;
+}
+.report-specs {
+  display: flex; flex-direction: column;
+  border-top: 1px solid var(--grid);
+}
+.spec-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--grid);
+  font-family: var(--fm); font-size: 11px;
+}
+.spec-l { color: var(--fg3); text-transform: uppercase; letter-spacing: 0.1em; }
+.spec-v { color: var(--white); font-weight: 700; }
+.report-price { display: flex; align-items: baseline; gap: 14px; }
+.price-amount {
+  font-family: var(--fm); font-weight: 700; font-size: 40px;
+  color: var(--ducky); line-height: 1;
+}
+.price-note {
+  font-family: var(--fm); font-size: 10px; color: var(--fg3);
+  text-transform: uppercase; letter-spacing: 0.12em;
+}
+.report-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.report-disclaimer {
+  font-size: 11px; color: var(--fg4); line-height: 1.6; margin-top: 4px;
+  max-width: 480px;
+}
+
 /* ── LOBOTRACKER ─────────────────────────────────────────────── */
 .tracker-wrap {
   background: var(--ds);
@@ -241,7 +286,7 @@ a { text-decoration: none; color: inherit; }
 .features { display: flex; flex-direction: column; gap: 0; }
 .feature-row {
   display: grid; grid-template-columns: 1fr 1fr; align-items: center;
-  border-top: 1px solid var(--grid); padding: 56px 0; gap: 64px;
+  border-top: 1px solid var(--coral); padding: 56px 0; gap: 64px;
 }
 .feature-row.flip { direction: rtl; }
 .feature-row.flip > * { direction: ltr; }
@@ -265,7 +310,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* Video */
-.video-section { padding: 72px 0; border-top: 1px solid var(--grid); }
+.video-section { padding: 72px 0; border-top: 1px solid var(--coral); }
 .video-title { font-weight: 800; font-size: 32px; color: var(--white); text-align: center; margin-bottom: 32px; }
 .video-wrap {
   max-width: 340px; margin: 0 auto;
@@ -276,7 +321,7 @@ a { text-decoration: none; color: inherit; }
 
 /* CTA block */
 .cta-block {
-  margin-top: 72px; padding-top: 72px; border-top: 1px solid var(--grid);
+  margin-top: 72px; padding-top: 72px; border-top: 1px solid var(--coral);
   display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;
 }
 .cta-block .btn { font-size: 16px; padding: 18px 40px; }
@@ -371,6 +416,8 @@ footer {
 
   /* Sections */
   .cards-grid, .tools-grid { grid-template-columns: 1fr; }
+  .report-grid { grid-template-columns: 1fr; gap: 36px; }
+  .report-img img { max-width: 280px; margin: 0 auto; }
   .feature-row { grid-template-columns: 1fr; gap: 32px; padding: 40px 0; }
   .feature-row.flip { direction: ltr; }
   .feature-img img { max-width: 100%; }
@@ -403,6 +450,7 @@ footer {
     <div class="nav-links" id="nav-links">
       <a href="#contenido"    class="nav-link">Contenido</a>
       <a href="#loboratorio"  class="nav-link">Loboratorio</a>
+      <a href="#loboreporte"  class="nav-link nav-link-ducky">LoboReporte</a>
       <a href="#lobotracker"  class="nav-link nav-link-highlight">LoboTracker</a>
       <a href="#contacto"     class="nav-link">Contacto</a>
     </div>
@@ -430,6 +478,7 @@ footer {
       <div class="hero-ctas">
         <a href="#contenido"   class="btn btn-primary">Ver el contenido</a>
         <a href="#loboratorio" class="btn btn-sky">Loboratorio</a>
+        <a href="#loboreporte" class="btn btn-ducky">LoboReporte</a>
         <a href="#lobotracker" class="btn btn-mint">LoboTracker</a>
       </div>
       <!-- Mobile stat strip -->
@@ -524,6 +573,42 @@ footer {
           <p class="tool-desc">Enfrentamos a diferentes inteligencias artificiales para ver cuál arma el mejor portafolio de inversión. Corriendo en vivo.</p>
           <a href="https://lobofinanciero.streamlit.app" target="_blank" rel="noopener" class="btn btn-primary" style="align-self:flex-start; margin-top:8px;">Ver resultados →</a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOBOREPORTE -->
+<section id="loboreporte" class="section mid">
+  <div class="container">
+    <div class="section-eyebrow"><span class="section-tag" style="color:var(--ducky)">LoboReporte</span></div>
+    <h2 class="section-title reveal">Análisis Trimestral<br>Q2 2026</h2>
+    <p class="section-sub reveal">Las 50 emisoras de Estados Unidos con la mejor combinación de Calidad, Crecimiento, Valor y Momentum del trimestre. 16 páginas.</p>
+
+    <div class="report-grid reveal">
+      <div class="report-img">
+        <img src="public/lobo_report/HM-vert-q2-2026.png" alt="Análisis Trimestral Q2 2026" loading="lazy">
+      </div>
+      <div class="report-content">
+        <ul class="report-bullets">
+          <li><strong style="color:var(--white);font-weight:700;">10 emisoras destacadas</strong> con una página de análisis a fondo cada una: scores por pilar, métricas clave y observaciones cuantitativas.</li>
+          <li><strong style="color:var(--white);font-weight:700;">Shortlist completa de 50 emisoras</strong> con composite score y los cuatro pilares.</li>
+          <li><strong style="color:var(--white);font-weight:700;">Mapa visual Calidad × Valor</strong> de toda la shortlist por sector y capitalización.</li>
+          <li><strong style="color:var(--white);font-weight:700;">Metodología transparente:</strong> los cinco filtros, los cuatro pilares y cómo leer los percentiles.</li>
+        </ul>
+        <div class="report-specs">
+          <div class="spec-row"><span class="spec-l">Formato</span><span class="spec-v">PDF · 16 páginas</span></div>
+          <div class="spec-row"><span class="spec-l">Datos al</span><span class="spec-v">19 · MAY · 2026</span></div>
+        </div>
+        <div class="report-price">
+          <span class="price-amount">$99 MXN</span>
+          <span class="price-note">o $4.99 USD en Gumroad</span>
+        </div>
+        <div class="report-ctas">
+          <a href="https://go.hotmart.com/X105944993D" target="_blank" rel="noopener" class="btn btn-ducky">Comprar en Hotmart →</a>
+          <a href="https://ellobofinanciero.gumroad.com/l/q2-2026" target="_blank" rel="noopener" class="btn btn-outline">Comprar en Gumroad →</a>
+        </div>
+        <p class="report-disclaimer">Contenido educativo. No constituye asesoría financiera ni recomendación de inversión. El comprador es responsable de sus propias decisiones.</p>
       </div>
     </div>
   </div>
